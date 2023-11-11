@@ -4,12 +4,17 @@ import { loginType } from './dto/user.dto';
 import { UserService } from './user.service';
 import {  Response } from 'express';
 
+import {
+  
+  ApiConsumes,
+} from '@nestjs/swagger';
+
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-
+  @ApiConsumes('application/x-www-form-urlencoded')
   @Post()
   async userLogin(@Body() loginData:loginType , @Res() res:Response ){
       const answer = await this.userService.loginUser(loginData)

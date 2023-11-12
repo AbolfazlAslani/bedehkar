@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { loginType } from './dto/user.dto';
 import { User } from './entitiy/user.entity';
 import { JwtService } from '@nestjs/jwt';
+import { ApiTags } from '@nestjs/swagger';
 
 
 @Injectable()
@@ -40,6 +41,10 @@ export class UserService {
     }
         
   getUsers(): Promise<User[]> {
-    return this.userRepository.find();
+    return this.userRepository.find(
+      {
+        select: ["id","username", "bedehkar"]
+      }
+    );
   }
 }

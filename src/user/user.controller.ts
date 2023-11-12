@@ -6,10 +6,10 @@ import {  Response } from 'express';
 
 import {
   
-  ApiConsumes,
+  ApiConsumes, ApiTags,
 } from '@nestjs/swagger';
 
-
+@ApiTags('User Section')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}

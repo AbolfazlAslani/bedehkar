@@ -47,4 +47,8 @@ export class UserService {
       }
     );
   }
+  
+  async findUsersByIds(userIds: string[]): Promise<User[]> {
+    return this.userRepository.findByIds(userIds);
+  }
 }

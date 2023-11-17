@@ -48,21 +48,28 @@ export class FactorService {
     async update(id: number, factorData: factorType): Promise<Factor>{
         const factor = await this.findOne(id);
         
-        const {price, users} = factorData;      
+        const {price, users, products} = factorData;      
         const findUsers = await this.userService.findUsersByIds(users)
         if (users){
             factor.users = findUsers;
         }
+        factor.products = products;
         factor.price = price;
         
         return this.factorRepository.save(factor)
         
     }
-    async factorDelete(id:number): Promise<void>{
-        const result = this.findOne(id)
-        if (result){
-            await this.factorRepository.delete(id)
-        }
+    async factorDelete(id:number): Promise<Factor | undefined>{
+      const factor = await this.findOne(id)
+
+      if (!factor) {
+        return undefined; // Factor not found
+      }
+    
+      // Delete the factor from the database
+      await this.factorRepository.remove(factor);
+    
+      return factor;
         
     }
     

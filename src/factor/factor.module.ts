@@ -8,7 +8,8 @@ import { FactorService } from './factor.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Factor]),
-        UserModule    ],
+        UserModule
+        ],
     providers:[FactorService,UserService,JwtService],
     
     exports:[TypeOrmModule],

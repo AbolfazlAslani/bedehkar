@@ -7,11 +7,15 @@ import { User } from './entitiy/user.entity';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { FactorModule } from 'src/factor/factor.module';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './jwt.strategy';
 
 
 
 @Module({
   imports: [TypeOrmModule.forFeature([User]),
+  PassportModule.register({ defaultStrategy: 'jwt' }),
+  
   JwtModule.registerAsync({
     imports: [ConfigModule],
     inject: [ConfigService],
@@ -25,7 +29,7 @@ import { FactorModule } from 'src/factor/factor.module';
   
   ],
   controllers: [UserController],
-  providers: [UserService],
-  exports : [TypeOrmModule,UserService]
+  providers: [UserService, JwtStrategy],
+  exports : [TypeOrmModule,UserService, JwtModule, PassportModule]
 })
 export class UserModule {}

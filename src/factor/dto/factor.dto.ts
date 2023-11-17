@@ -23,8 +23,11 @@ export class factorType {
     users?:string[];
     
     
- @ApiProperty({ type: [String], example: ['product1', 'product2'], required:true, description:"bought products" })
+  @ApiProperty({ type: [String], example: ['product1', 'product2'], required:true, description:"bought products" })
   @IsArray()
   products?: string[];
+  
+   // Exclude password field from the response
+
     
   }

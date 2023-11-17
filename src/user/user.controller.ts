@@ -15,7 +15,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @ApiConsumes('application/x-www-form-urlencoded')
-  @Post()
+  @Post("login")
   async userLogin(@Body() loginData:loginType , @Res() res:Response ){
       const answer = await this.userService.loginUser(loginData)
       return res.status(200).json({
@@ -27,7 +27,7 @@ export class UserController {
     
   }
 
-  @Get()
+  @Get("get")
   getUsers() {
     return this.userService.getUsers();
   }
